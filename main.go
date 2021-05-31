@@ -1,10 +1,11 @@
 package main
 
 import (
-	"fmt"
-	"log"
+	/*"fmt"
+	
 	"math/rand"
-	"time"
+	"time"*/
+	"log"
 
 	"github.com/saulzepeda/dc-final/api"
 	"github.com/saulzepeda/dc-final/controller"
@@ -18,17 +19,17 @@ func main() {
 	go controller.Start()
 
 	// Start Scheduler
-	jobs := make(chan scheduler.Job)
-	go scheduler.Start(jobs)
+	//jobs := make(chan scheduler.Job)
+	go scheduler.Start(api.Jobs)
 	// Send sample jobs
-	sampleJob := scheduler.Job{Address: "localhost:50051", RPCName: "hello"}
+	//sampleJob := scheduler.Job{Address: "localhost:50051", RPCName: ""}
 
 	// API
-	go api.Start()
-
-	for {
+	api.Start()
+	
+	/*for {
 		sampleJob.RPCName = fmt.Sprintf("hello-%v", rand.Intn(10000))
 		jobs <- sampleJob
 		time.Sleep(time.Second * 5)
-	}
+	}*/
 }

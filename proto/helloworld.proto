@@ -22,10 +22,20 @@ option go_package = "github.com/CodersSquad/final-dc/proto";
 
 package proto;
 
+message Image {
+  string WlId = 1;
+  string WlName = 2;
+  int64 Index = 3;
+  string Filepath = 4;
+  string Filter = 5;
+}
+
 // The greeting service definition.
 service Greeter {
   // Sends a greeting
   rpc SayHello (HelloRequest) returns (HelloReply) {}
+  rpc GrayscaleEffect (ImageRequest) returns (ImageReply) {}
+  rpc BlurEffect (ImageRequest) returns (ImageReply) {}
 }
 
 // The request message containing the user's name.
@@ -35,5 +45,13 @@ message HelloRequest {
 
 // The response message containing the greetings
 message HelloReply {
+  string message = 1;
+}
+
+message ImageRequest {
+  Image img = 2;
+}
+
+message ImageReply {
   string message = 1;
 }
