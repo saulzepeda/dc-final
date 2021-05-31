@@ -196,6 +196,11 @@ func Start() {
 						"filename": new_filename,
 					})
 					return
+				} else {
+					c.JSON(http.StatusOK, gin.H{
+						"message": "Image saved",
+						"filename": fileName,
+					})
 				}
 				new_job := scheduler.Job{
 					Address: "localhost:50051", 

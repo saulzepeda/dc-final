@@ -116,22 +116,12 @@ func joinCluster() {
 	if err = sock.Dial(controllerAddress); err != nil {
 		die("can't dial on req socket: %s", err.Error())
 	}
-	// Empty byte array effectively subscribes to everything
-	/*err = sock.SetOption(mangos.OptionSubscribe, []byte(""))
-	if err != nil {
-		die("cannot subscribe: %s", err.Error())
-	}*/
-	for {
-		/*if msg, err = sock.Recv(); err != nil {
-			die("Cannot recv: %s", err.Error())
-		}*/
-		info := fmt.Sprintf("%v %v %v %v %v %v", workerName, tags, jobs_done, defaultRPCPort,)
+	info := fmt.Sprintf("%v %v %v %v %v %v", workerName, tags, jobs_done, defaultRPCPort)
 		if err = sock.Send([]byte(info)); err != nil {
 			die("Cannot send: %s", err.Error())
 		}
 		log.Printf("Message-Passing: Worker(%s): Received %s\n", workerName, string(msg))
 		time.Sleep(time.Second)
-	}
 }
 
 func getAvailablePort() int {

@@ -71,35 +71,26 @@ func Start() {
 		die("Set Option: %s", err.Error())
 	}*/
 
-	for {
-		// Could also use sock.RecvMsg to get header
-		/*err = sock.Send([]byte("Workers"))
-		if err !=nil{
-			die("There are no workers %+v", err.Error())
-		}*/
-		for{
-			if answer, err = sock.Recv();err !=nil{
-				break
-			}
-
-			new_worker := Worker{}
-			info := strings.Split(string(answer)," ")
-			new_worker.Name = info[0]
-			new_worker.Status = "Available"
-			new_worker.Tags = info[1]
-			port_int, _ := strconv.Atoi(info[3])
-			new_worker.Port = port_int
-			jobs_done_int, _ := strconv.Atoi(info[2])
-			new_worker.Jobs_done = jobs_done_int
-			new_worker.URL = "localhost:" + info[3]
-			_, ok := Workers[new_worker.Name]
-			if !ok {
-				Workers[new_worker.Name] = new_worker
-			}
-
-			fmt.Println(Workers[new_worker.Name].Name, " serves in localhost:", Workers[new_worker.Name].Port, "\n")
-
+	for{
+		if answer, err = sock.Recv();err !=nil{
+			break
 		}
+		new_worker := Worker{}
+		info := strings.Split(string(answer)," ")
+		new_worker.Name = info[0]
+		new_worker.Status = "Available"
+		new_worker.Tags = info[1]
+		port_int, _ := strconv.Atoi(info[3])
+		new_worker.Port = port_int
+		jobs_done_int, _ := strconv.Atoi(info[2])
+		new_worker.Jobs_done = jobs_done_int
+		new_worker.URL = "localhost:" + info[3]
+		_, ok := Workers[new_worker.Name]
+		if !ok {
+			Workers[new_worker.Name] = new_worker
+		}
+
+		fmt.Println(Workers[new_worker.Name].Name, " serves in localhost:", Workers[new_worker.Name].Port, "\n")
 
 	}
 }
