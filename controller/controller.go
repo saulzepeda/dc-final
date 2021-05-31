@@ -15,7 +15,7 @@ import (
 )
 
 var sock mangos.Socket
-//var end = make(chan string)
+
 var controllerAddress = "tcp://localhost:40899"
 
 var Workloads = make(map[string]Workload)
@@ -39,13 +39,6 @@ type Worker struct{
 	Jobs_done int    `json:"jobs_done"`
 }
 
-/*var proofs = make(map[string]Proof)
-type Proof struct{
-	ID int
-	Worker string
-}
-*/
-
 func die(format string, v ...interface{}) {
 	fmt.Fprintln(os.Stderr, fmt.Sprintf(format, v...))
 	os.Exit(1)
@@ -66,10 +59,6 @@ func Start() {
 	if err = sock.Listen(controllerAddress); err != nil {
 		die("can't listen on rep socket: %s", err.Error())
 	}
-	/*err = sock.SetOption(mangos.OptionSurveyTime, time.Second)
-	if err != nil {
-		die("Set Option: %s", err.Error())
-	}*/
 
 	for{
 		if answer, err = sock.Recv();err !=nil{
