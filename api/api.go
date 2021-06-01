@@ -187,7 +187,7 @@ func Start() {
 			if ok {
 				img_id := FormatId(len(controller.Workloads[wl_id].Filtered_images) + 1)
 				new_filename := img_id + "_original" + filepath.Ext(file.Filename)
-				path := "../images/" + controller.Workloads[wl_id].Name + "/" + new_filename
+				path := "images/" + controller.Workloads[wl_id].Name + "/" + new_filename
 
 				err := c.SaveUploadedFile(file, path)
 				if err != nil {
@@ -286,7 +286,7 @@ func Start() {
 					"message": "The workload already exists.",
 				})
 			} else{
-				_ = os.MkdirAll("../images/" + wl_name + "/", 0755)
+				_ = os.MkdirAll("images/" + wl_name + "/", 0755)
 
 				wl_id := GenerateId(0)
 				wl := controller.Workload{

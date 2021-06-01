@@ -115,7 +115,7 @@ func Start(jobs chan Job) error {
 	fmt.Println("Hi Scheduler")
 	for {
 		job := <-jobs
-		fmt.Println("Aqui estoy")
+		//fmt.Println("Aqui estoy")
 		worker := controller.Worker{}
 		port := 0
 		for _, temp_worker := range controller.Workers {
